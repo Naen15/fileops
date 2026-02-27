@@ -1,0 +1,12 @@
+Petite appli CLI en Go (1.22) qui regroupe :
+• analyse de fichiers texte
+
+• téléchargement d’articles Wikipédia
+
+• gestion des processus (macOS & Windows)
+
+• verrouillage/lecture-seule de fichiers + journalisation
+
+• infos Docker (ps / stats)
+
+• alerte espace disque (< 10 %)
