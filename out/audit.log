@@ -1,0 +1,3 @@
+2026-02-27 12:08:48 | LOCK   | out/test.txt.lock
+2026-02-27 12:09:28 | UNLOCK | out/test.txt.lock
+2026-02-27 12:10:03 | CHMOD RO | cmd/fileops/test.txt

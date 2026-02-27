@@ -1,0 +1,139 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"log"
+	"os"
+	"path/filepath"
+
+	"fileops/internal/cfg"
+	"fileops/internal/ops"
+)
+
+func main() {
+	// 1) Charger la config
+	conf, err := cfg.Load("config.txt")
+	if err != nil {
+		log.Fatalf("Config: %v\n", err)
+	}
+
+	currentFile := conf.DefaultFile
+	in := bufio.NewScanner(os.Stdin)
+
+	for {
+============= MENU ===============
+[f] Changer de fichier courant (actuel: %s)
+[a] Analyse fichier courant
+[b] Analyse répertoire
+[q] Quitter
+> `, currentFile)
+
+		if !in.Scan() {
+			fmt.Println("\nBye.")
+			return
+		}
+		choice := in.Text()
+
+		switch choice {
+		case "f":
+			fmt.Print("Chemin du fichier : ")
+			if !in.Scan() {
+				continue
+			}
+			path := in.Text()
+			if path == "" {
+				path = currentFile
+			}
+			if info, err := os.Stat(path); err != nil || info.IsDir() {
+				fmt.Println("Fichier invalide")
+			} else {
+				currentFile = path
+			}
+
+		case "a":
+			if err := runSingleFile(conf, currentFile); err != nil {
+			}
+
+		case "b":
+			fmt.Print("Répertoire : ")
+			if !in.Scan() {
+				continue
+			}
+			dir := in.Text()
+			if dir == "" {
+				dir = conf.BaseDir
+			}
+			if err := runBatch(conf, dir); err != nil {
+			}
+
+		case "q":
+			fmt.Println("À la prochaine")
+			return
+		default:
+			fmt.Println("Choix inconnu.")
+		}
+	}
+}
+
+func runSingleFile(conf cfg.Config, path string) error {
+	lines, err := ops.ReadLines(path)
+	if err != nil {
+		return err
+	}
+
+		return err
+	}
+
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Print("Mot-clé pour filtrer : ")
+	if !scanner.Scan() {
+		return nil
+	}
+	keyword := scanner.Text()
+
+	if err := ops.FilterLines(lines, keyword, filepath.Join(conf.OutDir, "filtered.txt"), true); err != nil {
+		return err
+	}
+	if err := ops.FilterLines(lines, keyword, filepath.Join(conf.OutDir, "filtered_not.txt"), false); err != nil {
+		return err
+	}
+
+	fmt.Print("Combien de lignes pour head/tail ? ")
+	if !scanner.Scan() {
+		return nil
+	}
+	var n int
+	fmt.Sscan(scanner.Text(), &n)
+
+	_ = ops.WriteLines(lines[:min(n, len(lines))], filepath.Join(conf.OutDir, "head.txt"))
+	_ = ops.WriteLines(lines[max(0, len(lines)-n):], filepath.Join(conf.OutDir, "tail.txt"))
+
+	return nil
+}
+
+func runBatch(conf cfg.Config, dir string) error {
+	files, err := ops.ListTxt(dir)
+	if err != nil {
+		return err
+	}
+	reportPath := filepath.Join(conf.OutDir, "report.txt")
+	indexPath := filepath.Join(conf.OutDir, "index.txt")
+	mergedPath := filepath.Join(conf.OutDir, "merged.txt")
+
+	return ops.ProcessBatch(files, reportPath, indexPath, mergedPath)
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}

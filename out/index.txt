@@ -1,0 +1,9 @@
+cmd/fileops/out/filtered.txt | 944 o | 2026-02-26 16:25:26
+cmd/fileops/out/filtered_not.txt | 1811 o | 2026-02-26 16:25:26
+cmd/fileops/out/head.txt | 39 o | 2026-02-26 16:25:31
+cmd/fileops/out/index.txt | 0 o | 2026-02-27 09:14:55
+cmd/fileops/out/merged.txt | 0 o | 2026-02-27 09:14:55
+cmd/fileops/out/report.txt | 0 o | 2026-02-27 09:14:55
+cmd/fileops/out/tail.txt | 38 o | 2026-02-26 16:25:31
+cmd/fileops/test.txt | 104 o | 2026-02-26 16:27:41
+cmd/fileops/test2.txt | 71 o | 2026-02-26 14:55:52

@@ -1,0 +1,4 @@
+		fmt.Printf(`
+				fmt.Printf("Erreur: %v\n", err)
+				fmt.Printf("Erreur: %v\n", err)
+	if err := ops.PrintFileInfo(path, lines); err != nil {
