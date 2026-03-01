@@ -16,12 +16,12 @@ Application CLI en Go qui regroupe :
 
 ## Installation rapide
 
-git clone https://github.com/votreorg/fileops.git
+git clone https://github.com/Naen15/fileops.git
 cd fileops
 go mod tidy # récupère les dépendances
 go run ./cmd/fileops # lance le menu
 
-# ou
+ou
 
 go build -o fileops ./cmd/fileops
 ./fileops --config mon_config.json # JSON facultatif
@@ -29,9 +29,15 @@ go build -o fileops ./cmd/fileops
 ## Menu principal
 
 [a] Analyse fichier
+
 [b] Batch répertoire (.txt) (parallèle)
+
 [c] WikiOps (1 ou n articles) (parallèle)
+
 [d] ProcessOps (list, kill sécurisés)
+
 [e] SecureOps (lock, read-only, audit)
+
 [g] ContainerOps (docker ps et stats)
+
 [q] Quitter
