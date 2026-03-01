@@ -98,7 +98,7 @@ func statsWords(lines []string) (int, float64) {
 	return count, float64(sum) / float64(count)
 }
 
-// FetchMany télécharge plusieurs articles en parallèle.
+// FetchMany télécharge plusieurs articles en parallèle
 func FetchMany(titles []string) ([]*Article, error) {
 	var (
 		wg   sync.WaitGroup

@@ -4,7 +4,6 @@ import (
 	"syscall"
 )
 
-// DiskFree retourne pour la partition courante
 func DiskFree() (float64, error) {
 	var st syscall.Statfs_t
 	if err := syscall.Statfs(".", &st); err != nil {

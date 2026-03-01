@@ -8,7 +8,6 @@ import (
 	"strings"
 )
 
-// Container résume ce que l’on veut afficher.
 type Container struct {
 	ID     string
 	Name   string
@@ -16,7 +15,6 @@ type Container struct {
 	Status string
 }
 
-// List retourne tous les conteneurs actifs (docker ps).
 func List() ([]Container, error) {
 	cmd := exec.Command("docker", "ps", "--format", "{{json .}}")
 	out, err := cmd.Output()
@@ -42,7 +40,7 @@ func List() ([]Container, error) {
 	return res, nil
 }
 
-// Stats renvoie une ligne « CPU %   MEM % » via docker stats --no-stream.
+// Stats renvoie une ligne « CPU %   MEM % »
 func Stats(containerID string) (string, error) {
 	out, err := exec.Command("docker", "stats", "--no-stream",
 		"--format", "{{.CPUPerc}} {{.MemPerc}}", containerID).Output()

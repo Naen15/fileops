@@ -15,7 +15,7 @@ type Process struct {
 	Name string
 }
 
-// ---- LISTE DES PROCESSUS ------
+// LISTE DES PROCESSUS
 
 func List() ([]Process, error) {
 	switch runtime.GOOS {

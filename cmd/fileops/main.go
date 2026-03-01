@@ -19,7 +19,7 @@ import (
 )
 
 func main() {
-	flag.String("config", "", "chemin du config.json (optionnel)")
+	flag.String("config", "config.json", "chemin du config.json")
 	flag.Parse()
 
 	conf, err := cfg.Load()
